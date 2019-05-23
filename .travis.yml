@@ -1,6 +1,16 @@
 language: node_js
 node_js:
- - "8"
-before_script:
-  - npm install -g gulp gulp-cli
-script: gulp
+  - "stable"
+cache:
+  directories:
+    - node_modules
+script:
+  - npm test
+  - npm run build
+deploy:
+  provider: surge
+  skip_cleanup: true
+  domain: edgar-cardozo.surge.sh
+  project: ./amazing/build/
+on:
+  branch: master
